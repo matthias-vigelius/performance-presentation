@@ -1,0 +1,322 @@
+---
+title: "Performance Optimization"
+subtitle: "Micro-optimizations on modern CPUs"
+format:
+  revealjs: 
+    slide-number: true
+    theme: moon
+    chalkboard: 
+      buttons: false
+    preview-links: auto
+    logo: images/fluxim.png
+resources:
+  - performance_optimization.pdf
+---
+
+## Easyperf
+![](images/cover.jpg){height="400"}
+
+
+::: aside
+Easyperf blog, book and labs available [here](https://easyperf.net/).
+:::
+
+
+# High-level analysis
+
+## Flame graph
+![](images/FlameGraph.jpg)
+
+# CPU cache and memory access
+
+## Basic cache architecture
+::: columns
+::: {.column width="35%"}
+   * all memory access through cache
+   * L1/L2 cache per core
+   * L3 cache shared between cores
+   * NUMA adds another level
+:::
+
+::: {.column width="3%"}
+:::
+
+::: {.column width="52%"}
+![](images/zen3_cache.png)
+:::
+:::
+
+## Set-associative cache
+::: columns
+::: {.column width="45%"}
+   * hierarchical access
+   * cache line 64 bytes
+   * set idx = address mod #sets
+   * cache lines can conflict
+:::
+
+::: {.column width="3%"}
+:::
+
+::: {.column width="52%"}
+![](images/setassociative_cropped.jpeg.png)
+:::
+:::
+
+## AMD Ryzen 7 5850U
+
+```{python}
+import numpy as np
+units = {
+  'B': 1,
+  'kB': 1024,
+  'MB': 1048576
+}
+
+allsizes = {}
+allrates = {}
+
+for line in open("myoutput.txt", "r"):
+   if line == "\n":
+      continue
+   values = line.split(",")
+   key = values[0] # this is the plot legend
+   msstring = values[1].split(" ")
+   unit = msstring[4]
+   memsize = float(msstring[3]) * units[unit] # in bytes
+   rate = float(values[3].split(" ")[1]) # in MB/s
+
+   if key not in allsizes:
+      #allsizes[key] = [memsize]
+      #allrates[key] = [rate]
+      allsizes[key] = np.array([memsize])
+      allrates[key] = np.array([rate * units['MB']])
+   else:
+      #allsizes[key].append(memsize)
+      #allrates[key].append(rate)
+      allsizes[key] = np.append(allsizes[key], [memsize])
+      allrates[key] = np.append(allrates[key], [rate * units['MB']])
+```
+
+```{python}
+import bokeh.io, bokeh.plotting, bokeh.layouts
+
+bokeh.io.output_notebook(hide_banner=True)
+
+yunit = 1024*1024*1024
+p = bokeh.plotting.figure(title = "Memory bandwidth", x_axis_type="log",  width=int(1600*1.5), height=int(900*1.5))
+
+# plot cache sizes
+l1cache = 32*1024
+l2cache = 512*1024
+l3cache = 16*1024*1024
+p.patch([1e2, l1cache, l1cache, 1e2], [0, 0, 270, 270], alpha=0.5, line_width=2)
+p.patch([l1cache, l2cache, l2cache, l1cache], [0, 0, 270, 270], alpha=0.5, line_width=2, fill_color="yellow")
+p.patch([l2cache, l3cache, l3cache, l2cache], [0, 0, 270, 270], alpha=0.5, line_width=2, fill_color="red")
+
+p.line(allsizes['Sequential read (64-bit)'], allrates['Sequential read (64-bit)']/yunit, color = "blue", legend_label = "MOV (64 bit)")
+p.circle(allsizes['Sequential read (64-bit)'], allrates['Sequential read (64-bit)']/yunit, color = "blue", legend_label = "MOV (64 bit)")
+p.line(allsizes['Sequential read (128-bit)'], allrates['Sequential read (128-bit)']/yunit, color = "red", legend_label = "MOVDQA (SSE2, 128 bit)")
+p.diamond(allsizes['Sequential read (128-bit)'], allrates['Sequential read (128-bit)']/yunit, color = "red", legend_label = "MOVDQA (SSE2, 128 bit)")
+p.line(allsizes['Sequential read (256-bit)'], allrates['Sequential read (256-bit)']/yunit, color = "green", legend_label = "VMOVDQA (AVX, 256 bit)")
+p.square(allsizes['Sequential read (256-bit)'], allrates['Sequential read (256-bit)']/yunit, color = "green", legend_label = "VMOVDQA (AVX, 256 bit)")
+
+p.line(allsizes['Random read (64-bit)'], allrates[ 'Random read (64-bit)']/yunit, color = "blue", line_dash='dashed')
+p.circle(allsizes['Random read (64-bit)'], allrates[ 'Random read (64-bit)']/yunit, color = "blue", line_dash='dashed')
+p.line(allsizes['Random read (128-bit)'], allrates['Random read (128-bit)']/yunit, color = "red", line_dash='dashed')
+p.diamond(allsizes['Random read (128-bit)'], allrates['Random read (128-bit)']/yunit, color = "red", line_dash='dashed')
+p.line(allsizes['Random read (256-bit)'], allrates['Random read (256-bit)']/yunit, color = "green", line_dash='dashed')
+p.square(allsizes['Random read (256-bit)'], allrates['Random read (256-bit)']/yunit, color = "green", line_dash='dashed')
+
+p.xaxis.axis_label = 'Data size [B]'
+p.yaxis.axis_label = 'Transfer rate [GB/s]'
+
+bokeh.plotting.show(p)
+```
+
+::: aside
+Bandwidth measurements were taken using [bandwidth](https://zsmith.co/bandwidth.php)
+:::
+
+## Common pitfalls
+
+* random access prevents pre-fetching
+* strided access pollutes cache lines
+* hyper threading potentially pollutes cache lines
+* different thread writes to my cache line ("false sharing")
+* memory ordering in C++ (sequential consistency..)
+
+
+# CPU micro architecture
+
+## Pipeline model
+Increased throughput by pipeline.
+
+::: columns
+::: {.column width="55%"}
+   1. Instruction fetch (IF)
+   2. Instruction decode (ID)
+   3. Execute (EXE)
+   4. Memory access (MEM)
+   5. Write back (WRI)
+:::
+
+::: {.column width="3%"}
+:::
+
+::: {.column width="32%"}
+![](images/pipeline.png){fig-align="center" width=1600}
+:::
+:::
+
+Execution is [superscalar]{style="color: red;"} and [out-of-order]{style="color: red;"}.
+
+## Latency of common operations
+![](images/latency.png){fig-align="center" height="400"}
+
+Latency: Time before next [dependent]{style="color: red;"} instruction is issued.
+
+## Common pitfalls
+
+* Long dependency chains prevent out-of-order exection
+* Port contention
+* Branch misprediction
+* Aliasing prevents loop optimizations
+* Missed vectorization opportunities
+
+# Roofline analysis
+
+## Basic idea
+Roofline plot: Plot arithmetic intensity vs. FLOP/s
+
+::: columns
+::: {.column width="45%"}
+
+```{=tex}
+\begin{equation}
+\mathrm{AI} = \frac{\mathrm{FLOP}}{\mathrm{byte}}
+\end{equation}
+```
+:::
+
+::: {.column width="3%"}
+:::
+
+::: {.column width="42%"}
+![](images/Roofline-intro.png){fig-align="center"}
+:::
+:::
+
+Premise: AI is algorithm property and hardware-independent (not true!)
+
+## Roofline analysis - continued
+::: columns
+::: {.column width="42%"}
+![](images/Roofline-memory.png){fig-align="center"  style="background-color:white;" width="600" }
+:::
+
+::: {.column width="6%"}
+:::
+
+::: {.column width="42%"}
+![](images/Roofline-CPU.jpg){fig-align="center" width="600"}
+:::
+:::
+
+Rooflines depend on implementation of algorithm!
+
+## Example
+```{.cpp code-line-numbers="6"}
+void multiply(float *A, float *B, float *C) {
+   for (size_t i = 0; i < N; ++i) {
+      for (size_t j =0; j < N; ++j) {
+         for (size_t k = 0; k < N; ++k) {
+            // very naughty memory access pattern!
+            C[i*N+j] += A[i*N+k] * B[k*N+j];
+         }
+      }
+   }
+}
+```
+
+Neglecting integer operations, we have
+
+```{=tex}
+\begin{equation}
+\mathrm{AI} = \frac{2}{3}
+\end{equation}
+```
+
+## My machine
+```{python}
+import numpy as np
+seqread64L1 = np.average(np.array(allrates['Sequential read (64-bit)'])[np.array(allsizes['Sequential read (64-bit)']) < 1e4])
+seqread64L2 = np.average(np.array(allrates['Sequential read (64-bit)'])[np.logical_and(np.array(allsizes['Sequential read (64-bit)']) > 6e4, np.array(allsizes['Sequential read (64-bit)']) < 2e5)])
+seqread64L3 = np.average(np.array(allrates['Sequential read (64-bit)'])[np.logical_and(np.array(allsizes['Sequential read (64-bit)']) > 1e6, np.array(allsizes['Sequential read (64-bit)']) < 1e7)])
+seqread64DDR = np.average(np.array(allrates['Sequential read (64-bit)'])[np.array(allsizes['Sequential read (64-bit)']) > 2e7])
+
+randread64L1 = np.average(np.array(allrates['Random read (64-bit)'])[np.array(allsizes['Random read (64-bit)']) < 1e4])
+randread64L2 = np.average(np.array(allrates['Random read (64-bit)'])[np.logical_and(np.array(allsizes['Random read (64-bit)']) > 6e4, np.array(allsizes['Random read (64-bit)']) < 2e5)])
+randread64L3 = np.average(np.array(allrates['Random read (64-bit)'])[np.logical_and(np.array(allsizes['Random read (64-bit)']) > 1e6, np.array(allsizes['Random read (64-bit)']) < 1e7)])
+randread64DDR = np.average(np.array(allrates['Random read (64-bit)'])[np.array(allsizes['Random read (64-bit)']) > 2e7])
+
+# transfer rates are in B/s. We need to divide by four because we need four bytes per FLOP.
+p = bokeh.plotting.figure(title = "Roofline plot", x_axis_type="log", y_axis_type="log",  width=int(1600*1.5), height=int(900*1.5))
+x = 2.0**np.mgrid[-2:9]
+y64l1 = seqread64L1 * x/yunit/4
+y64DDR = seqread64DDR * x/yunit/4
+y64rl1 = randread64L1 * x/yunit/4
+y64rDDR = randread64DDR * x/yunit/4
+p.line(x, y64l1, color = "blue", legend_label = "Sequential L1")
+p.line(x, y64DDR, color = "green", legend_label = "Sequential DDR")
+p.line(x, y64rl1, color = "blue", line_dash="dashed", legend_label = "Random L1")
+p.line(x, y64rDDR, color = "green", line_dash="dashed", legend_label = "Random DDR")
+
+# add peak performance
+pi1 = 128 * np.ones_like(x)
+pi0 = 4 * np.ones_like(x)
+p.line(x, pi1, color = "red", legend_label = "Vectorized peak")
+p.line(x, pi0, color = "red", line_dash="dashed", legend_label = "Scalar peak")
+
+p.line([0.75, 0.75], [0.1, 1e4], color="black", line_width=2, legend_label ="GEMM")
+
+p.legend.location = 'top_left'
+p.xaxis.axis_label = 'Computational intensity [FLOPs/B]'
+p.yaxis.axis_label = 'Performance [GFLOPs/s]'
+bokeh.plotting.show(p)
+```
+
+::: aside
+Peak FLOP measurements were taken using [peakperf](https://github.com/Dr-Noob/peakperf)
+:::
+
+
+# Top-Down Microarchitecture Analysis
+
+## Performance metrics
+::: columns
+::: {.column width="65%"}
+* Retired instructions: instructions that were executed and not thrown away (speculative instructions)
+* Cycles per instruction (CPI)
+* Instructions per cycle (IPC)
+* Pipeline slot occupation
+* Cache missses
+
+:::
+
+::: {.column width="3%"}
+:::
+
+::: {.column width="22%"}
+![](images/PipelineSlot.jpg){fig-align="center"}
+:::
+:::
+
+## Top-Down Microarchitecture Analysis
+![](images/TMAM.png){fig-align="center"}
+
+
+## TODO
+
+* Maybe talk about aliasing
+* maybe use setfos flamegraph
