@@ -5,10 +5,10 @@ format:
   revealjs: 
     slide-number: true
     theme: moon
-    chalkboard: 
-      buttons: false
     preview-links: auto
     logo: images/fluxim.png
+    embed-resources: true
+    output-dir: docs
 resources:
   - performance_optimization.pdf
 ---
@@ -99,39 +99,42 @@ for line in open("myoutput.txt", "r"):
 ```
 
 ```{python}
-import bokeh.io, bokeh.plotting, bokeh.layouts
+import matplotlib.pyplot as plt
 
-bokeh.io.output_notebook(hide_banner=True)
+fig, ax = plt.subplots()
 
 yunit = 1024*1024*1024
-p = bokeh.plotting.figure(title = "Memory bandwidth", x_axis_type="log",  width=int(1600*1.5), height=int(900*1.5))
+
+ax.plot(allsizes['Sequential read (64-bit)'], allrates['Sequential read (64-bit)']/yunit, '-bo', label = "MOV (64 bit)")
+ax.plot(allsizes['Sequential read (128-bit)'], allrates['Sequential read (128-bit)']/yunit, '-rs', label = "MOVDQA (SSE2, 128 bit)")
+ax.plot(allsizes['Sequential read (256-bit)'], allrates['Sequential read (256-bit)']/yunit, '-g*', label = "VMOVDQA (AVX, 256 bit)")
+ax.plot(allsizes['Random read (64-bit)'], allrates[ 'Random read (64-bit)']/yunit, '--b')
+ax.plot(allsizes['Random read (128-bit)'], allrates['Random read (128-bit)']/yunit, '--r')
+ax.plot(allsizes['Random read (256-bit)'], allrates['Random read (256-bit)']/yunit, '--g')
+
+ax.set_xscale('log')
+
+ax.set_xlabel('Data size [B]')
+ax.set_ylabel('Transfer rate [GB/s]')
+#plt.line(allsizes['Random read (64-bit)'], allrates[ 'Random read (64-bit)']/yunit, color = "blue", line_dash='dashed')
+#plt.circle(allsizes['Random read (64-bit)'], allrates[ 'Random read (64-bit)']/yunit, color = "blue", line_dash='dashed')
+#plt.line(allsizes['Random read (128-bit)'], allrates['Random read (128-bit)']/yunit, color = "red", line_dash='dashed')
+#plt.diamond(allsizes['Random read (128-bit)'], allrates['Random read (128-bit)']/yunit, color = "red", line_dash='dashed')
+#plt.line(allsizes['Random read (256-bit)'], allrates['Random read (256-bit)']/yunit, color = "green", line_dash='dashed')
+#plt.square(allsizes['Random read (256-bit)'], allrates['Random read (256-bit)']/yunit, color = "green", line_dash='dashed')
 
 # plot cache sizes
 l1cache = 32*1024
 l2cache = 512*1024
 l3cache = 16*1024*1024
-p.patch([1e2, l1cache, l1cache, 1e2], [0, 0, 270, 270], alpha=0.5, line_width=2)
-p.patch([l1cache, l2cache, l2cache, l1cache], [0, 0, 270, 270], alpha=0.5, line_width=2, fill_color="yellow")
-p.patch([l2cache, l3cache, l3cache, l2cache], [0, 0, 270, 270], alpha=0.5, line_width=2, fill_color="red")
+ax.fill_between([1e2, l1cache, l1cache, 1e2], [0, 0, 270, 270], alpha=0.5, facecolor="grey")
+ax.fill_between([l1cache, l2cache, l2cache, l1cache], [0, 0, 270, 270], alpha=0.5, facecolor="lightgrey")
+ax.fill_between([l2cache, l3cache, l3cache, l2cache], [0, 0, 270, 270], alpha=0.5, facecolor="darkgrey")
 
-p.line(allsizes['Sequential read (64-bit)'], allrates['Sequential read (64-bit)']/yunit, color = "blue", legend_label = "MOV (64 bit)")
-p.circle(allsizes['Sequential read (64-bit)'], allrates['Sequential read (64-bit)']/yunit, color = "blue", legend_label = "MOV (64 bit)")
-p.line(allsizes['Sequential read (128-bit)'], allrates['Sequential read (128-bit)']/yunit, color = "red", legend_label = "MOVDQA (SSE2, 128 bit)")
-p.diamond(allsizes['Sequential read (128-bit)'], allrates['Sequential read (128-bit)']/yunit, color = "red", legend_label = "MOVDQA (SSE2, 128 bit)")
-p.line(allsizes['Sequential read (256-bit)'], allrates['Sequential read (256-bit)']/yunit, color = "green", legend_label = "VMOVDQA (AVX, 256 bit)")
-p.square(allsizes['Sequential read (256-bit)'], allrates['Sequential read (256-bit)']/yunit, color = "green", legend_label = "VMOVDQA (AVX, 256 bit)")
 
-p.line(allsizes['Random read (64-bit)'], allrates[ 'Random read (64-bit)']/yunit, color = "blue", line_dash='dashed')
-p.circle(allsizes['Random read (64-bit)'], allrates[ 'Random read (64-bit)']/yunit, color = "blue", line_dash='dashed')
-p.line(allsizes['Random read (128-bit)'], allrates['Random read (128-bit)']/yunit, color = "red", line_dash='dashed')
-p.diamond(allsizes['Random read (128-bit)'], allrates['Random read (128-bit)']/yunit, color = "red", line_dash='dashed')
-p.line(allsizes['Random read (256-bit)'], allrates['Random read (256-bit)']/yunit, color = "green", line_dash='dashed')
-p.square(allsizes['Random read (256-bit)'], allrates['Random read (256-bit)']/yunit, color = "green", line_dash='dashed')
+plt.legend()
 
-p.xaxis.axis_label = 'Data size [B]'
-p.yaxis.axis_label = 'Transfer rate [GB/s]'
-
-bokeh.plotting.show(p)
+plt.show()
 ```
 
 ::: aside
@@ -259,31 +262,37 @@ randread64L1 = np.average(np.array(allrates['Random read (64-bit)'])[np.array(al
 randread64L2 = np.average(np.array(allrates['Random read (64-bit)'])[np.logical_and(np.array(allsizes['Random read (64-bit)']) > 6e4, np.array(allsizes['Random read (64-bit)']) < 2e5)])
 randread64L3 = np.average(np.array(allrates['Random read (64-bit)'])[np.logical_and(np.array(allsizes['Random read (64-bit)']) > 1e6, np.array(allsizes['Random read (64-bit)']) < 1e7)])
 randread64DDR = np.average(np.array(allrates['Random read (64-bit)'])[np.array(allsizes['Random read (64-bit)']) > 2e7])
+```
 
-# transfer rates are in B/s. We need to divide by four because we need four bytes per FLOP.
-p = bokeh.plotting.figure(title = "Roofline plot", x_axis_type="log", y_axis_type="log",  width=int(1600*1.5), height=int(900*1.5))
+```{python}
+fig, ax = plt.subplots()
+
+ax.set_xscale('log')
+ax.set_yscale('log')
+
 x = 2.0**np.mgrid[-2:9]
 y64l1 = seqread64L1 * x/yunit/4
 y64DDR = seqread64DDR * x/yunit/4
 y64rl1 = randread64L1 * x/yunit/4
 y64rDDR = randread64DDR * x/yunit/4
-p.line(x, y64l1, color = "blue", legend_label = "Sequential L1")
-p.line(x, y64DDR, color = "green", legend_label = "Sequential DDR")
-p.line(x, y64rl1, color = "blue", line_dash="dashed", legend_label = "Random L1")
-p.line(x, y64rDDR, color = "green", line_dash="dashed", legend_label = "Random DDR")
+ax.plot(x, y64l1, 'b-', label = "Sequential L1")
+ax.plot(x, y64DDR, 'g-', label = "Sequential DDR")
+ax.plot(x, y64rl1, 'b--', label = "Random L1")
+ax.plot(x, y64rDDR, 'g--', label = "Random DDR")
 
 # add peak performance
 pi1 = 128 * np.ones_like(x)
 pi0 = 4 * np.ones_like(x)
-p.line(x, pi1, color = "red", legend_label = "Vectorized peak")
-p.line(x, pi0, color = "red", line_dash="dashed", legend_label = "Scalar peak")
+ax.plot(x, pi1, 'r-', label = "Vectorized peak")
+ax.plot(x, pi0, 'r--', label = "Scalar peak")
 
-p.line([0.75, 0.75], [0.1, 1e4], color="black", line_width=2, legend_label ="GEMM")
+ax.plot([0.75, 0.75], [0.1, 1e4], "k-", label ="GEMM")
 
-p.legend.location = 'top_left'
-p.xaxis.axis_label = 'Computational intensity [FLOPs/B]'
-p.yaxis.axis_label = 'Performance [GFLOPs/s]'
-bokeh.plotting.show(p)
+ax.set_xlabel('Computational intensity [FLOP/B]')
+ax.set_ylabel('Performance [GFLOP/s]')
+
+plt.legend(loc="upper left")
+plt.show()
 ```
 
 ::: aside
@@ -321,7 +330,3 @@ Peak FLOP measurements were taken using [peakperf](https://github.com/Dr-Noob/pe
 ## Setfos VTUNE TMAM
 ![](images/tmam_vtune.png){fig-align="center"}
 
-## TODO
-
-* Maybe talk about aliasing
-* maybe use setfos flamegraph
