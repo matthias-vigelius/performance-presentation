@@ -25,7 +25,7 @@ Easyperf blog, book and labs available [here](https://easyperf.net/).
 # High-level analysis
 
 ## Flame graph
-![](images/FlameGraph.jpg)
+![](images/flame_graph.PNG){fig-align="center"}
 
 # CPU cache and memory access
 
@@ -290,6 +290,9 @@ bokeh.plotting.show(p)
 Peak FLOP measurements were taken using [peakperf](https://github.com/Dr-Noob/peakperf)
 :::
 
+## setfos
+![](images/roofline_setfos.png){fig-align="center"}
+
 
 # Top-Down Microarchitecture Analysis
 
@@ -315,6 +318,8 @@ Peak FLOP measurements were taken using [peakperf](https://github.com/Dr-Noob/pe
 ## Top-Down Microarchitecture Analysis
 ![](images/TMAM.png){fig-align="center"}
 
+## Setfos VTUNE TMAM
+![](images/tmam_vtune.png){fig-align="center"}
 
 ## TODO
 

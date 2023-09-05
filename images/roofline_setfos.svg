@@ -1,0 +1,1759 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 1483 1050"
+   version="1.1"
+   id="svg163"
+   sodipodi:docname="roofline_setfos.svg"
+   inkscape:version="1.3 (0e150ed6c4, 2023-07-21)"
+   inkscape:export-filename="roofline_setfos.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <defs
+     id="defs163">
+    <rect
+       x="918.59766"
+       y="267.87168"
+       width="363.46671"
+       height="54.325934"
+       id="rect164" />
+    <rect
+       x="918.59766"
+       y="267.87168"
+       width="363.46671"
+       height="54.325934"
+       id="rect165" />
+  </defs>
+  <sodipodi:namedview
+     id="namedview163"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.029797"
+     inkscape:cx="787.04832"
+     inkscape:cy="378.71542"
+     inkscape:window-width="1916"
+     inkscape:window-height="1044"
+     inkscape:window-x="3840"
+     inkscape:window-y="16"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg163" />
+  <style
+     id="style1">    svg { font : caption; }      .idvc2_chart_axis { fill: none; stroke: gray; stroke-width: 1; vector-effect: non-scaling-stroke; shape-rendering: crispEdges; }      .idvc2_chart_axis_text { fill: #333; font-size: 95%; stroke: none; stroke-width: 1; vector-effect: non-scaling-stroke; }      .idvc2_chart_roofline_text { fill: gray; font-size: 90%; }      .idvc2_chart_roofline_text.selected { fill: #000; }      .idvc2_chart_roofline_text.hidden { fill: none; }      .idvc2_chart_roofline_explanation { fill: none; }      .idvc2_chart_roofline_center_marker { stroke: #000; stroke-width: 1 }      .roofline_child_line { stroke: none; fill: none; }      .roofline_parent_line { stroke: none; fill: none; }      .roofline_child_arrow { stroke: none; fill: none; }      .roofline_parent_arrow { stroke: none; fill: none; }      .roofline_loop { stroke: #000; stroke-width: 1; vector-effect: non-scaling-stroke; shape-rendering: geometricPrecision; fill: lightgray; }      .roofline_loop.no_loop_position { stroke: darkgray; fill: #eee; }      .roofline_loop.loop_inactive_result { opacity: 0.4; }      .idvc2_roofline_line { stroke: #999; stroke-dasharray: 4,4; fill: none; stroke-width: 1; vector-effect: non-scaling-stroke; shape-rendering: crispEdges; }      .idvc2_roofline_grid_line { stroke: #ddd; fill: none; stroke-width: 1; vector-effect: non-scaling-stroke; shape-rendering: crispEdges; }      .idvc2_roofline_line.selected { stroke: #000; shape-rendering: auto; stroke-dasharray: none; }      .idvc2_roofline_line_hotarea { stroke: none; fill: none; }      .roofline_roofs_cross { stroke: none; fill: none; }      .roofline_coord_line { stroke: none; fill: none; stroke-width: 1; vector-effect: non-scaling-stroke; shape-rendering: crispEdges; }      .roofline_coord_line.selected { stroke: gray; stroke-dasharray: none !important; }      .roofline_expander { stroke: none; fill: none; }      .roofline_expander_vert_line { stroke: none; fill: none; }      .roofline_expander_horz_line { stroke: none; fill: none; }      .idvc2_roofline_roof_crossing { stroke: none; fill: none; }      .idvc2_roofline_roof_crossing_line { stroke: none; fill: none; }      .idvc2_roofline_roof_crossing_label { stroke: none; fill: none; }      .idvc2_roofline_loops_matching_line { stroke: black; stroke-dasharray: 4,4; fill: none; vector-effect: non-scaling-stroke; shape-rendering: crispEdges; }      .idvc2_roofline_loops_matching_arrow { stroke: #000; fill: black; vector-effect: non-scaling-stroke; shape-rendering: geometricPrecision; }      .idvc2_roofline_loops_matching_label { font-size: 100%; }      .idvc2_roofline_total_value_tick_active { stroke: none; fill: none; }      .idvc2_roofline_total_value_tick { stroke: none; fill: none; }      .stairs_delta_line {stroke-width: 2;vector-effect: non-scaling-stroke;shape-rendering: geometricPrecision;}      .stairs_connection_line {stroke: black;stroke-width: 1;stroke-dasharray: 2,2;vector-effect: non-scaling-stroke;shape-rendering: geometricPrecision;}      .stairs_delta_ends {stroke-width: 3;vector-effect: non-scaling-stroke;shape-rendering: geometricPrecision;}      .dumbbell_line {stroke: #2D3741;stroke-width: 1.5;fill: none;vector-effect: non-scaling-stroke;shape-rendering: geometricPrecision;}      .zone_text_root {position: relative; overflow: visible;}       .zone_text_container {position: absolute; left: 0; bottom: 0; right: 0; text-align: center; overflow-wrap: break-word; word-wrap: break-word; hyphens: auto; color: rgb(160, 0, 0); background: transparent; opacity: 0.6;}      .zone_text_caption {min-width: 0; pointer-events: none;}      .zone_text_explanation {font-size: 80%; vertical-align: super;}      .idvc2_hidden { stroke: none !important; fill: none !important; }  </style>
+  <g
+     id="g21">
+    <svg
+       id="vert_axis"
+       viewBox="0 0 63 1026"
+       width="63"
+       height="1026"
+       version="1.1">
+      <line
+         x1="62.5"
+         y1="0"
+         x2="62.5"
+         y2="1026"
+         class="idvc2_chart_axis"
+         id="line1" />
+      <line
+         x1="57"
+         y1="1002"
+         x2="63"
+         y2="1002"
+         class="idvc2_chart_axis"
+         id="line2" />
+      <line
+         x1="57"
+         y1="1002"
+         x2="63"
+         y2="1002"
+         class="idvc2_chart_axis_hot"
+         id="line3" />
+      <text
+         x="53"
+         y="1002"
+         class="idvc2_chart_axis_text"
+         style="text-anchor: end;dominant-baseline: middle"
+         id="text3">1.00e-5</text>
+      <line
+         x1="57"
+         y1="889"
+         x2="63"
+         y2="889"
+         class="idvc2_chart_axis"
+         id="line4" />
+      <line
+         x1="57"
+         y1="889"
+         x2="63"
+         y2="889"
+         class="idvc2_chart_axis_hot"
+         id="line5" />
+      <text
+         x="53"
+         y="889"
+         class="idvc2_chart_axis_text"
+         style="text-anchor: end;dominant-baseline: middle"
+         id="text5">0.0001</text>
+      <line
+         x1="57"
+         y1="777"
+         x2="63"
+         y2="777"
+         class="idvc2_chart_axis"
+         id="line6" />
+      <line
+         x1="57"
+         y1="777"
+         x2="63"
+         y2="777"
+         class="idvc2_chart_axis_hot"
+         id="line7" />
+      <text
+         x="53"
+         y="777"
+         class="idvc2_chart_axis_text"
+         style="text-anchor: end;dominant-baseline: middle"
+         id="text7">0.001</text>
+      <line
+         x1="57"
+         y1="664"
+         x2="63"
+         y2="664"
+         class="idvc2_chart_axis"
+         id="line8" />
+      <line
+         x1="57"
+         y1="664"
+         x2="63"
+         y2="664"
+         class="idvc2_chart_axis_hot"
+         id="line9" />
+      <text
+         x="53"
+         y="664"
+         class="idvc2_chart_axis_text"
+         style="text-anchor: end;dominant-baseline: middle"
+         id="text9">0.01</text>
+      <line
+         x1="57"
+         y1="552"
+         x2="63"
+         y2="552"
+         class="idvc2_chart_axis"
+         id="line10" />
+      <line
+         x1="57"
+         y1="552"
+         x2="63"
+         y2="552"
+         class="idvc2_chart_axis_hot"
+         id="line11" />
+      <text
+         x="53"
+         y="552"
+         class="idvc2_chart_axis_text"
+         style="text-anchor: end;dominant-baseline: middle"
+         id="text11">0.1</text>
+      <line
+         x1="57"
+         y1="439"
+         x2="63"
+         y2="439"
+         class="idvc2_chart_axis"
+         id="line12" />
+      <line
+         x1="57"
+         y1="439"
+         x2="63"
+         y2="439"
+         class="idvc2_chart_axis_hot"
+         id="line13" />
+      <text
+         x="53"
+         y="439"
+         class="idvc2_chart_axis_text"
+         style="text-anchor: end;dominant-baseline: middle"
+         id="text13">1</text>
+      <line
+         x1="57"
+         y1="327"
+         x2="63"
+         y2="327"
+         class="idvc2_chart_axis"
+         id="line14" />
+      <line
+         x1="57"
+         y1="327"
+         x2="63"
+         y2="327"
+         class="idvc2_chart_axis_hot"
+         id="line15" />
+      <text
+         x="53"
+         y="327"
+         class="idvc2_chart_axis_text"
+         style="text-anchor: end;dominant-baseline: middle"
+         id="text15">10</text>
+      <line
+         x1="57"
+         y1="214"
+         x2="63"
+         y2="214"
+         class="idvc2_chart_axis"
+         id="line16" />
+      <line
+         x1="57"
+         y1="214"
+         x2="63"
+         y2="214"
+         class="idvc2_chart_axis_hot"
+         id="line17" />
+      <text
+         x="53"
+         y="214"
+         class="idvc2_chart_axis_text"
+         style="text-anchor: end;dominant-baseline: middle"
+         id="text17">100</text>
+      <line
+         x1="57"
+         y1="102"
+         x2="63"
+         y2="102"
+         class="idvc2_chart_axis"
+         id="line18" />
+      <line
+         x1="57"
+         y1="102"
+         x2="63"
+         y2="102"
+         class="idvc2_chart_axis_hot"
+         id="line19" />
+      <text
+         x="53"
+         y="102"
+         class="idvc2_chart_axis_text"
+         style="text-anchor: end;dominant-baseline: middle"
+         id="text19">1000</text>
+      <defs
+         id="SVG_1_TextBackgroundDefs">
+        <filter
+           id="SVG_1_TextBackground"
+           x="0"
+           y="0"
+           width="1"
+           height="1">
+          <feFlood
+             flood-color="white"
+             id="feFlood19" />
+          <feComposite
+             in="SourceGraphic"
+             id="feComposite19" />
+        </filter>
+      </defs>
+      <defs
+         id="defs20">
+        <marker
+           id="SVG_1_TotalValue"
+           markerWidth="6"
+           markerHeight="10"
+           refX="1"
+           refY="5"
+           orient="auto"
+           markerUnits="userSpaceOnUse">
+          <path
+             d="M 0 0 L 0 10 L 6 5 L 0 0"
+             class="idvc2_roofline_total_value_tick"
+             id="path19" />
+        </marker>
+        <marker
+           id="SVG_1_TotalValueActive"
+           markerWidth="6"
+           markerHeight="10"
+           refX="1"
+           refY="5"
+           orient="auto"
+           markerUnits="userSpaceOnUse">
+          <path
+             d="M 0 0 L 0 10 L 6 5 L 0 0"
+             class="idvc2_roofline_total_value_tick_active"
+             id="path20" />
+        </marker>
+      </defs>
+      <line
+         x1="57"
+         y1="437"
+         x2="63"
+         y2="437"
+         class="idvc2_chart_axis idvc2_active"
+         style="stroke: transparent; stroke-width:10; marker-start:url(#SVG_1_TotalValue)"
+         id="line20" />
+      <line
+         x1="57"
+         y1="437"
+         x2="63"
+         y2="437"
+         class="idvc2_chart_axis_hot"
+         id="line21" />
+      <text
+         x="53"
+         y="437"
+         class=""
+         style="text-anchor: end;dominant-baseline: middle"
+         fill="none"
+         id="text21">1.05</text>
+    </svg>
+  </g>
+  <g
+     transform="translate(63, 1026)"
+     id="g40">
+    <svg
+       id="horz_axis"
+       viewBox="0 0 1420 24"
+       width="1420"
+       height="24"
+       version="1.1">
+      <line
+         x1="0"
+         y1="0.5"
+         x2="1419.59375"
+         y2="0.5"
+         class="idvc2_chart_axis"
+         id="line22" />
+      <line
+         x1="139"
+         y1="6"
+         x2="139"
+         y2="0"
+         class="idvc2_chart_axis"
+         id="line23" />
+      <line
+         x1="139"
+         y1="6"
+         x2="139"
+         y2="0"
+         class="idvc2_chart_axis_hot"
+         id="line24" />
+      <text
+         x="139"
+         y="10"
+         class="idvc2_chart_axis_text"
+         style="text-anchor: middle; dominant-baseline:text-before-edge;"
+         id="text24"> 1.00e-5 </text>
+      <line
+         x1="310"
+         y1="6"
+         x2="310"
+         y2="0"
+         class="idvc2_chart_axis"
+         id="line25" />
+      <line
+         x1="310"
+         y1="6"
+         x2="310"
+         y2="0"
+         class="idvc2_chart_axis_hot"
+         id="line26" />
+      <text
+         x="310"
+         y="10"
+         class="idvc2_chart_axis_text"
+         style="text-anchor: middle; dominant-baseline:text-before-edge;"
+         id="text26"> 0.0001 </text>
+      <line
+         x1="482"
+         y1="6"
+         x2="482"
+         y2="0"
+         class="idvc2_chart_axis"
+         id="line27" />
+      <line
+         x1="482"
+         y1="6"
+         x2="482"
+         y2="0"
+         class="idvc2_chart_axis_hot"
+         id="line28" />
+      <text
+         x="482"
+         y="10"
+         class="idvc2_chart_axis_text"
+         style="text-anchor: middle; dominant-baseline:text-before-edge;"
+         id="text28"> 0.001 </text>
+      <line
+         x1="653"
+         y1="6"
+         x2="653"
+         y2="0"
+         class="idvc2_chart_axis"
+         id="line29" />
+      <line
+         x1="653"
+         y1="6"
+         x2="653"
+         y2="0"
+         class="idvc2_chart_axis_hot"
+         id="line30" />
+      <text
+         x="653"
+         y="10"
+         class="idvc2_chart_axis_text"
+         style="text-anchor: middle; dominant-baseline:text-before-edge;"
+         id="text30"> 0.01 </text>
+      <line
+         x1="824"
+         y1="6"
+         x2="824"
+         y2="0"
+         class="idvc2_chart_axis"
+         id="line31" />
+      <line
+         x1="824"
+         y1="6"
+         x2="824"
+         y2="0"
+         class="idvc2_chart_axis_hot"
+         id="line32" />
+      <text
+         x="824"
+         y="10"
+         class="idvc2_chart_axis_text"
+         style="text-anchor: middle; dominant-baseline:text-before-edge;"
+         id="text32"> 0.1 </text>
+      <line
+         x1="995"
+         y1="6"
+         x2="995"
+         y2="0"
+         class="idvc2_chart_axis"
+         id="line33" />
+      <line
+         x1="995"
+         y1="6"
+         x2="995"
+         y2="0"
+         class="idvc2_chart_axis_hot"
+         id="line34" />
+      <text
+         x="995"
+         y="10"
+         class="idvc2_chart_axis_text"
+         style="text-anchor: middle; dominant-baseline:text-before-edge;"
+         id="text34"> 1 </text>
+      <line
+         x1="1167"
+         y1="6"
+         x2="1167"
+         y2="0"
+         class="idvc2_chart_axis"
+         id="line35" />
+      <line
+         x1="1167"
+         y1="6"
+         x2="1167"
+         y2="0"
+         class="idvc2_chart_axis_hot"
+         id="line36" />
+      <text
+         x="1167"
+         y="10"
+         class="idvc2_chart_axis_text"
+         style="text-anchor: middle; dominant-baseline:text-before-edge;"
+         id="text36"> 10 </text>
+      <line
+         x1="1338"
+         y1="6"
+         x2="1338"
+         y2="0"
+         class="idvc2_chart_axis"
+         id="line37" />
+      <line
+         x1="1338"
+         y1="6"
+         x2="1338"
+         y2="0"
+         class="idvc2_chart_axis_hot"
+         id="line38" />
+      <text
+         x="1338"
+         y="10"
+         class="idvc2_chart_axis_text"
+         style="text-anchor: middle; dominant-baseline:text-before-edge;"
+         id="text38"> 100 </text>
+      <defs
+         id="defs39">
+        <marker
+           id="SVG_2_TotalValue"
+           markerWidth="6"
+           markerHeight="10"
+           refX="1"
+           refY="5"
+           orient="auto"
+           markerUnits="userSpaceOnUse">
+          <path
+             d="M 0 0 L 0 10 L 6 5 L 0 0"
+             class="idvc2_roofline_total_value_tick"
+             id="path38" />
+        </marker>
+        <marker
+           id="SVG_2_TotalValueActive"
+           markerWidth="6"
+           markerHeight="10"
+           refX="1"
+           refY="5"
+           orient="auto"
+           markerUnits="userSpaceOnUse">
+          <path
+             d="M 0 0 L 0 10 L 6 5 L 0 0"
+             class="idvc2_roofline_total_value_tick_active"
+             id="path39" />
+        </marker>
+      </defs>
+      <line
+         x1="815"
+         y1="6"
+         x2="815"
+         y2="0"
+         class="idvc2_chart_axis idvc2_active"
+         style="stroke: transparent; stroke-width:10; marker-start:url(#SVG_2_TotalValue)"
+         id="line39" />
+      <line
+         x1="815"
+         y1="6"
+         x2="815"
+         y2="0"
+         class="idvc2_chart_axis_hot"
+         id="line40" />
+      <text
+         x="815"
+         y="10"
+         class=""
+         style="text-anchor: middle; dominant-baseline:text-before-edge;"
+         fill="none"
+         id="text40"> 0.088 </text>
+    </svg>
+  </g>
+  <g
+     transform="translate(63, 0)"
+     id="g163">
+    <svg
+       id="roofline_content"
+       viewBox="0 0 1420 1026"
+       width="1420"
+       height="1026"
+       version="1.1">
+      <g
+         id="SVG_0_BackgroundLayer">
+        <polygon
+           fill="rgb(160, 30, 30)"
+           style="opacity:0.14"
+           points="1301,1026 1301,86 1420,86 1420,1026"
+           id="polygon40" />
+        <polygon
+           fill="rgb(200, 40, 40)"
+           style="opacity:0.1"
+           points="726,1026 726,221 932,86 1301,86 1301,1026"
+           id="polygon41" />
+        <polygon
+           fill="rgb(240, 50, 50)"
+           style="opacity:0.06"
+           points="0,1026 0,698 726,221 726,1026"
+           id="polygon42" />
+        <line
+           class="idvc2_roofline_grid_line"
+           x1="1338"
+           y1="1026"
+           x2="1338"
+           y2="0"
+           id="line42" />
+        <line
+           class="idvc2_roofline_grid_line"
+           x1="1167"
+           y1="1026"
+           x2="1167"
+           y2="0"
+           id="line43" />
+        <line
+           class="idvc2_roofline_grid_line"
+           x1="995"
+           y1="1026"
+           x2="995"
+           y2="0"
+           id="line44" />
+        <line
+           class="idvc2_roofline_grid_line"
+           x1="824"
+           y1="1026"
+           x2="824"
+           y2="0"
+           id="line45" />
+        <line
+           class="idvc2_roofline_total_line"
+           x1="815"
+           y1="1026"
+           x2="815"
+           y2="0"
+           id="line46" />
+        <line
+           class="idvc2_roofline_grid_line"
+           x1="653"
+           y1="1026"
+           x2="653"
+           y2="0"
+           id="line47" />
+        <line
+           class="idvc2_roofline_grid_line"
+           x1="482"
+           y1="1026"
+           x2="482"
+           y2="0"
+           id="line48" />
+        <line
+           class="idvc2_roofline_grid_line"
+           x1="310"
+           y1="1026"
+           x2="310"
+           y2="0"
+           id="line49" />
+        <line
+           class="idvc2_roofline_grid_line"
+           x1="139"
+           y1="1026"
+           x2="139"
+           y2="0"
+           id="line50" />
+        <line
+           class="idvc2_roofline_grid_line"
+           x1="0"
+           y1="1002"
+           x2="1420"
+           y2="1002"
+           id="line51" />
+        <line
+           class="idvc2_roofline_grid_line"
+           x1="0"
+           y1="889"
+           x2="1420"
+           y2="889"
+           id="line52" />
+        <line
+           class="idvc2_roofline_grid_line"
+           x1="0"
+           y1="777"
+           x2="1420"
+           y2="777"
+           id="line53" />
+        <line
+           class="idvc2_roofline_grid_line"
+           x1="0"
+           y1="664"
+           x2="1420"
+           y2="664"
+           id="line54" />
+        <line
+           class="idvc2_roofline_grid_line"
+           x1="0"
+           y1="552"
+           x2="1420"
+           y2="552"
+           id="line55" />
+        <line
+           class="idvc2_roofline_grid_line"
+           x1="0"
+           y1="439"
+           x2="1420"
+           y2="439"
+           id="line56" />
+        <line
+           class="idvc2_roofline_total_line"
+           x1="0"
+           y1="437"
+           x2="1420"
+           y2="437"
+           id="line57" />
+        <line
+           class="idvc2_roofline_grid_line"
+           x1="0"
+           y1="327"
+           x2="1420"
+           y2="327"
+           id="line58" />
+        <line
+           class="idvc2_roofline_grid_line"
+           x1="0"
+           y1="214"
+           x2="1420"
+           y2="214"
+           id="line59" />
+        <line
+           class="idvc2_roofline_grid_line"
+           x1="0"
+           y1="102"
+           x2="1420"
+           y2="102"
+           id="line60" />
+        <line
+           class="idvc2_roofline_line_hotarea idvc2_active"
+           x1="0"
+           y1="698"
+           x2="932"
+           y2="86"
+           id="line61" />
+        <line
+           class="idvc2_roofline_line_hotarea idvc2_active"
+           x1="0"
+           y1="743"
+           x2="1001"
+           y2="86"
+           id="line62" />
+        <line
+           class="idvc2_roofline_line_hotarea idvc2_active"
+           x1="0"
+           y1="787"
+           x2="1067"
+           y2="86"
+           id="line63" />
+        <line
+           class="idvc2_roofline_line_hotarea idvc2_active"
+           x1="0"
+           y1="941"
+           x2="1301"
+           y2="86"
+           id="line64" />
+        <line
+           class="idvc2_roofline_line_hotarea idvc2_active"
+           x1="932"
+           y1="86"
+           x2="1420"
+           y2="86"
+           id="line65" />
+        <line
+           class="idvc2_roofline_line_hotarea idvc2_active"
+           x1="879"
+           y1="120"
+           x2="1420"
+           y2="120"
+           id="line66" />
+        <line
+           class="idvc2_roofline_line_hotarea idvc2_active"
+           x1="879"
+           y1="120"
+           x2="1420"
+           y2="120"
+           id="line67" />
+        <line
+           class="idvc2_roofline_line_hotarea idvc2_active"
+           x1="830"
+           y1="153"
+           x2="1420"
+           y2="153"
+           id="line68" />
+        <line
+           class="idvc2_roofline_line_hotarea idvc2_active"
+           x1="726"
+           y1="221"
+           x2="1420"
+           y2="221"
+           id="line69" />
+        <foreignObject
+           class="zone_text_root idvc2_active"
+           x="4"
+           y="990"
+           width="718"
+           height="20">
+          <xhtml:body
+             class="zone_text_container">
+            <xhtml:div
+               class="zone_text_container">
+              <xhtml:span
+                 class="zone_text_caption">Memory bound</xhtml:span>
+            </xhtml:div>
+          </xhtml:body>
+        </foreignObject>
+        <foreignObject
+           class="zone_text_root idvc2_active"
+           x="730"
+           y="990"
+           width="567"
+           height="20">
+          <xhtml:body
+             class="zone_text_container">
+            <xhtml:div
+               class="zone_text_container">
+              <xhtml:span
+                 class="zone_text_caption">Bound by compute and memory roofs</xhtml:span>
+            </xhtml:div>
+          </xhtml:body>
+        </foreignObject>
+        <foreignObject
+           class="zone_text_root idvc2_active"
+           x="1305"
+           y="990"
+           width="111"
+           height="20">
+          <xhtml:body
+             class="zone_text_container">
+            <xhtml:div
+               class="zone_text_container">
+              <xhtml:span
+                 class="zone_text_caption">Compute bound</xhtml:span>
+            </xhtml:div>
+          </xhtml:body>
+        </foreignObject>
+      </g>
+      <g
+         id="SVG_0_LoopsLayer">
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="824"
+           cy="306"
+           r="8"
+           style="fill:red !important"
+           id="circle69" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="701"
+           cy="471"
+           r="6"
+           style="fill:yellow !important"
+           id="circle70" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="118"
+           cy="854"
+           r="4"
+           style="fill:green !important"
+           id="circle71" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="807"
+           cy="320"
+           r="4"
+           style="fill:green !important"
+           id="circle72" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="813"
+           cy="365"
+           r="4"
+           style="fill:green !important"
+           id="circle73" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="841"
+           cy="329"
+           r="4"
+           style="fill:green !important"
+           id="circle74" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="732"
+           cy="402"
+           r="4"
+           style="fill:green !important"
+           id="circle75" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="711"
+           cy="424"
+           r="4"
+           style="fill:green !important"
+           id="circle76" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="808"
+           cy="395"
+           r="4"
+           style="fill:green !important"
+           id="circle77" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="659"
+           cy="426"
+           r="4"
+           style="fill:green !important"
+           id="circle78" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="799"
+           cy="535"
+           r="4"
+           style="fill:green !important"
+           id="circle79" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="811"
+           cy="444"
+           r="4"
+           style="fill:green !important"
+           id="circle80" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="854"
+           cy="419"
+           r="4"
+           style="fill:green !important"
+           id="circle81" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="655"
+           cy="445"
+           r="4"
+           style="fill:green !important"
+           id="circle82" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="922"
+           cy="507"
+           r="4"
+           style="fill:green !important"
+           id="circle83" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="831"
+           cy="475"
+           r="4"
+           style="fill:green !important"
+           id="circle84" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="777"
+           cy="522"
+           r="4"
+           style="fill:green !important"
+           id="circle85" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="871"
+           cy="541"
+           r="4"
+           style="fill:green !important"
+           id="circle86" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="811"
+           cy="444"
+           r="4"
+           style="fill:green !important"
+           id="circle87" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="789"
+           cy="594"
+           r="4"
+           style="fill:green !important"
+           id="circle88" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="729"
+           cy="493"
+           r="4"
+           style="fill:green !important"
+           id="circle89" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="811"
+           cy="444"
+           r="4"
+           style="fill:green !important"
+           id="circle90" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="811"
+           cy="444"
+           r="4"
+           style="fill:green !important"
+           id="circle91" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="789"
+           cy="423"
+           r="4"
+           style="fill:green !important"
+           id="circle92" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="759"
+           cy="444"
+           r="4"
+           style="fill:green !important"
+           id="circle93" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="736"
+           cy="371"
+           r="4"
+           style="fill:green !important"
+           id="circle94" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="773"
+           cy="390"
+           r="4"
+           style="fill:green !important"
+           id="circle95" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="773"
+           cy="410"
+           r="4"
+           style="fill:green !important"
+           id="circle96" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="871"
+           cy="506"
+           r="4"
+           style="fill:green !important"
+           id="circle97" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="892"
+           cy="506"
+           r="4"
+           style="fill:green !important"
+           id="circle98" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="677"
+           cy="624"
+           r="4"
+           style="fill:green !important"
+           id="circle99" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="871"
+           cy="386"
+           r="4"
+           style="fill:green !important"
+           id="circle100" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="719"
+           cy="425"
+           r="4"
+           style="fill:green !important"
+           id="circle101" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="771"
+           cy="365"
+           r="4"
+           style="fill:green !important"
+           id="circle102" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="531"
+           cy="557"
+           r="4"
+           style="fill:green !important"
+           id="circle103" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="686"
+           cy="563"
+           r="4"
+           style="fill:green !important"
+           id="circle104" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="671"
+           cy="536"
+           r="4"
+           style="fill:green !important"
+           id="circle105" />
+        <circle
+           class="roofline_loop idvc2_active"
+           cx="799"
+           cy="379"
+           r="4"
+           style="fill:green !important"
+           id="circle106" />
+      </g>
+      <g
+         id="SVG_0_RoofsLayer">
+        <line
+           class="idvc2_roofline_line L1Bandwidth"
+           x1="0"
+           y1="698"
+           x2="932"
+           y2="86"
+           id="line106" />
+        <line
+           class="idvc2_roofline_line selected"
+           x1="0"
+           y1="698"
+           x2="726"
+           y2="221"
+           id="line107" />
+        <line
+           class="idvc2_roofline_line L2Bandwidth"
+           x1="0"
+           y1="743"
+           x2="1001"
+           y2="86"
+           id="line108" />
+        <line
+           class="idvc2_roofline_line DPVectorFMAPeak"
+           x1="879"
+           y1="120"
+           x2="1420"
+           y2="120"
+           id="line109" />
+        <rect
+           x="723"
+           y="218"
+           width="6"
+           height="6"
+           class="roofline_roofs_cross idvc2_active"
+           id="rect109" />
+        <line
+           x1="726"
+           y1="224"
+           x2="726"
+           y2="1026"
+           class="roofline_coord_line"
+           id="line110" />
+        <rect
+           x="792"
+           y="218"
+           width="6"
+           height="6"
+           class="roofline_roofs_cross idvc2_active"
+           id="rect110" />
+        <line
+           x1="795"
+           y1="224"
+           x2="795"
+           y2="1026"
+           class="roofline_coord_line"
+           id="line111" />
+        <rect
+           x="858"
+           y="218"
+           width="6"
+           height="6"
+           class="roofline_roofs_cross idvc2_active"
+           id="rect111" />
+        <line
+           x1="861"
+           y1="224"
+           x2="861"
+           y2="1026"
+           class="roofline_coord_line"
+           id="line112" />
+        <rect
+           x="1093"
+           y="218"
+           width="6"
+           height="6"
+           class="roofline_roofs_cross idvc2_active"
+           id="rect112" />
+        <line
+           x1="1096"
+           y1="224"
+           x2="1096"
+           y2="1026"
+           class="roofline_coord_line"
+           id="line113" />
+        <rect
+           x="827"
+           y="150"
+           width="6"
+           height="6"
+           class="roofline_roofs_cross idvc2_active"
+           id="rect113" />
+        <line
+           x1="830"
+           y1="156"
+           x2="830"
+           y2="1026"
+           class="roofline_coord_line"
+           id="line114" />
+        <rect
+           x="896"
+           y="150"
+           width="6"
+           height="6"
+           class="roofline_roofs_cross idvc2_active"
+           id="rect114" />
+        <line
+           x1="899"
+           y1="156"
+           x2="899"
+           y2="1026"
+           class="roofline_coord_line"
+           id="line115" />
+        <rect
+           x="962"
+           y="150"
+           width="6"
+           height="6"
+           class="roofline_roofs_cross idvc2_active"
+           id="rect115" />
+        <line
+           x1="965"
+           y1="156"
+           x2="965"
+           y2="1026"
+           class="roofline_coord_line"
+           id="line116" />
+        <rect
+           x="1196"
+           y="150"
+           width="6"
+           height="6"
+           class="roofline_roofs_cross idvc2_active"
+           id="rect116" />
+        <line
+           x1="1199"
+           y1="156"
+           x2="1199"
+           y2="1026"
+           class="roofline_coord_line"
+           id="line117" />
+        <rect
+           x="876"
+           y="117"
+           width="6"
+           height="6"
+           class="roofline_roofs_cross idvc2_active"
+           id="rect117" />
+        <line
+           x1="879"
+           y1="123"
+           x2="879"
+           y2="1026"
+           class="roofline_coord_line"
+           id="line118" />
+        <rect
+           x="945"
+           y="117"
+           width="6"
+           height="6"
+           class="roofline_roofs_cross idvc2_active"
+           id="rect118" />
+        <line
+           x1="948"
+           y1="123"
+           x2="948"
+           y2="1026"
+           class="roofline_coord_line"
+           id="line119" />
+        <rect
+           x="1011"
+           y="117"
+           width="6"
+           height="6"
+           class="roofline_roofs_cross idvc2_active"
+           id="rect119" />
+        <line
+           x1="1014"
+           y1="123"
+           x2="1014"
+           y2="1026"
+           class="roofline_coord_line"
+           id="line120" />
+        <rect
+           x="1245"
+           y="117"
+           width="6"
+           height="6"
+           class="roofline_roofs_cross idvc2_active"
+           id="rect120" />
+        <line
+           x1="1248"
+           y1="123"
+           x2="1248"
+           y2="1026"
+           class="roofline_coord_line"
+           id="line121" />
+        <rect
+           x="876"
+           y="117"
+           width="6"
+           height="6"
+           class="roofline_roofs_cross idvc2_active"
+           id="rect121" />
+        <line
+           x1="879"
+           y1="123"
+           x2="879"
+           y2="1026"
+           class="roofline_coord_line"
+           id="line122" />
+        <rect
+           x="945"
+           y="117"
+           width="6"
+           height="6"
+           class="roofline_roofs_cross idvc2_active"
+           id="rect122" />
+        <line
+           x1="948"
+           y1="123"
+           x2="948"
+           y2="1026"
+           class="roofline_coord_line"
+           id="line123" />
+        <rect
+           x="1011"
+           y="117"
+           width="6"
+           height="6"
+           class="roofline_roofs_cross idvc2_active"
+           id="rect123" />
+        <line
+           x1="1014"
+           y1="123"
+           x2="1014"
+           y2="1026"
+           class="roofline_coord_line"
+           id="line124" />
+        <rect
+           x="1246"
+           y="117"
+           width="6"
+           height="6"
+           class="roofline_roofs_cross idvc2_active"
+           id="rect124" />
+        <line
+           x1="1249"
+           y1="123"
+           x2="1249"
+           y2="1026"
+           class="roofline_coord_line"
+           id="line125" />
+        <rect
+           x="929"
+           y="83"
+           width="6"
+           height="6"
+           class="roofline_roofs_cross idvc2_active"
+           id="rect125" />
+        <line
+           x1="932"
+           y1="89"
+           x2="932"
+           y2="1026"
+           class="roofline_coord_line"
+           id="line126" />
+        <rect
+           x="998"
+           y="83"
+           width="6"
+           height="6"
+           class="roofline_roofs_cross idvc2_active"
+           id="rect126" />
+        <line
+           x1="1001"
+           y1="89"
+           x2="1001"
+           y2="1026"
+           class="roofline_coord_line"
+           id="line127" />
+        <rect
+           x="1064"
+           y="83"
+           width="6"
+           height="6"
+           class="roofline_roofs_cross idvc2_active"
+           id="rect127" />
+        <line
+           x1="1067"
+           y1="89"
+           x2="1067"
+           y2="1026"
+           class="roofline_coord_line"
+           id="line128" />
+        <rect
+           x="1298"
+           y="83"
+           width="6"
+           height="6"
+           class="roofline_roofs_cross idvc2_active"
+           id="rect128" />
+        <line
+           x1="1301"
+           y1="89"
+           x2="1301"
+           y2="1026"
+           class="roofline_coord_line"
+           id="line129" />
+        <line
+           class="idvc2_roofline_line DRAMBandwidth"
+           x1="0"
+           y1="941"
+           x2="1301"
+           y2="86"
+           id="line130" />
+        <line
+           class="idvc2_roofline_line selected"
+           x1="0"
+           y1="941"
+           x2="1096"
+           y2="221"
+           id="line131" />
+        <line
+           class="idvc2_roofline_line L3Bandwidth"
+           x1="0"
+           y1="787"
+           x2="1067"
+           y2="86"
+           id="line132" />
+        <line
+           class="idvc2_roofline_line SPVectorFMAPeak"
+           x1="932"
+           y1="86"
+           x2="1420"
+           y2="86"
+           id="line133" />
+        <line
+           class="idvc2_roofline_line ScalarAddPeak selected"
+           x1="726"
+           y1="221"
+           x2="1420"
+           y2="221"
+           id="line134" />
+        <line
+           class="idvc2_roofline_line DPVectorAddPeak"
+           x1="830"
+           y1="153"
+           x2="1420"
+           y2="153"
+           id="line135" />
+        <line
+           class="idvc2_roofline_line SPVectorAddPeak"
+           x1="879"
+           y1="120"
+           x2="1420"
+           y2="120"
+           id="line136" />
+      </g>
+      <g
+         id="SVG_0_RoofsTextLayer">
+        <text
+           class="idvc2_chart_roofline_text selected"
+           x="0"
+           y="0"
+           style="dominant-baseline:text-after-edge;"
+           transform="matrix(0.835894 -0.548892 0.548892 0.835894 10.4869 689.917)"
+           id="text136">L1 Bandwidth: 3272.34 GB/sec</text>
+        <text
+           class="idvc2_chart_roofline_text"
+           x="0"
+           y="0"
+           style="dominant-baseline:text-after-edge;"
+           transform="matrix(0.836012 -0.548711 0.548711 0.836012 10.4983 734.913)"
+           id="text137">L2 Bandwidth: 1293.02 GB/sec</text>
+        <text
+           class="idvc2_chart_roofline_text"
+           x="0"
+           y="0"
+           style="text-anchor: end; dominant-baseline:text-after-edge;"
+           transform="matrix(1 0 0 1 1416 119)"
+           id="text138">DP Vector FMA Peak: 687.61 GFLOPS</text>
+        <text
+           class="idvc2_chart_roofline_text selected"
+           x="0"
+           y="0"
+           style="dominant-baseline:text-after-edge;"
+           transform="matrix(0.835689 -0.549204 0.549204 0.835689 10.4433 932.94)"
+           id="text139">DRAM Bandwidth: 22.8 GB/sec</text>
+        <text
+           class="idvc2_chart_roofline_text"
+           x="0"
+           y="0"
+           style="dominant-baseline:text-after-edge;"
+           transform="matrix(0.835767 -0.549084 0.549084 0.835767 10.4766 778.921)"
+           id="text140">L3 Bandwidth: 531.72 GB/sec</text>
+        <text
+           class="idvc2_chart_roofline_text"
+           x="0"
+           y="0"
+           style="text-anchor: end; dominant-baseline:text-after-edge;"
+           transform="matrix(1 0 0 1 1416 85)"
+           id="text141">SP Vector FMA Peak: 1394.64 GFLOPS</text>
+        <text
+           class="idvc2_chart_roofline_text selected"
+           x="0"
+           y="0"
+           style="text-anchor: end; dominant-baseline:text-after-edge;"
+           transform="matrix(1 0 0 1 1416 220)"
+           id="text142">Scalar Add Peak: 87.65 GFLOPS</text>
+        <text
+           class="idvc2_chart_roofline_text"
+           x="0"
+           y="0"
+           style="text-anchor: end; dominant-baseline:text-after-edge;"
+           transform="matrix(1 0 0 1 1416 152)"
+           id="text143">DP Vector Add Peak: 353.65 GFLOPS</text>
+        <text
+           class="idvc2_chart_roofline_text"
+           x="0"
+           y="0"
+           style="text-anchor: end; dominant-baseline:text-before-edge;"
+           transform="matrix(1 0 0 1 1416 121)"
+           id="text144">SP Vector Add Peak: 685.24 GFLOPS</text>
+      </g>
+      <g
+         id="SVG_0_ForegroundLayer">
+        <line
+           x1="795"
+           y1="437"
+           x2="835"
+           y2="437"
+           class="idvc2_chart_roofline_center_marker"
+           id="line144" />
+        <line
+           x1="815"
+           y1="417"
+           x2="815"
+           y2="457"
+           class="idvc2_chart_roofline_center_marker"
+           id="line145" />
+        <text
+           class="idvc2_roofline_roof_crossing_label"
+           x="-100"
+           y="-100"
+           filter="url(#SVG_0_TextBackground)"
+           style="text-anchor:end; dominant-baseline: middle;"
+           id="text149"><tspan
+             class="idvc2_roofline_roof_crossing_label_value"
+             id="tspan145">272.69</tspan><tspan
+             class="idvc2_roofline_roof_crossing_label_measure"
+             id="tspan146"> GFLOPS </tspan><tspan
+             class="idvc2_roofline_roof_crossing_label_gain_x"
+             id="tspan147">(</tspan><tspan
+             class="idvc2_roofline_roof_crossing_label_gain"
+             id="tspan148">301.3</tspan><tspan
+             class="idvc2_roofline_roof_crossing_label_gain_x"
+             id="tspan149">x)</tspan></text>
+        <text
+           class="idvc2_roofline_roof_crossing_label"
+           x="-100"
+           y="-100"
+           filter="url(#SVG_0_TextBackground)"
+           style="text-anchor:end; dominant-baseline: middle;"
+           id="text154"><tspan
+             class="idvc2_roofline_roof_crossing_label_value"
+             id="tspan150">1.9</tspan><tspan
+             class="idvc2_roofline_roof_crossing_label_measure"
+             id="tspan151"> GFLOPS </tspan><tspan
+             class="idvc2_roofline_roof_crossing_label_gain_x"
+             id="tspan152">(</tspan><tspan
+             class="idvc2_roofline_roof_crossing_label_gain"
+             id="tspan153">2.1</tspan><tspan
+             class="idvc2_roofline_roof_crossing_label_gain_x"
+             id="tspan154">x)</tspan></text>
+        <use
+           xlink:href="#SVG_0_crossingTemplate"
+           class="idvc2_roofline_roof_crossing"
+           x="-100"
+           y="-100"
+           id="use154" />
+        <use
+           xlink:href="#SVG_0_crossingTemplate"
+           class="idvc2_roofline_roof_crossing"
+           x="-100"
+           y="-100"
+           id="use155" />
+        <line
+           x1="-100"
+           y1="0"
+           x2="-100"
+           y2="0"
+           class="idvc2_roofline_roof_crossing_line"
+           id="line155" />
+      </g>
+      <rect
+         x="0"
+         y="0"
+         width="0"
+         height="0"
+         class="idvc2_chart_selection"
+         id="rect155" />
+      <defs
+         id="defs155">
+        <filter
+           id="SVG_0_TextBackground"
+           x="0"
+           y="0"
+           width="1"
+           height="1">
+          <feFlood
+             flood-color="white"
+             id="feFlood155" />
+          <feComposite
+             in="SourceGraphic"
+             id="feComposite155" />
+        </filter>
+      </defs>
+      <defs
+         id="SVG_0_line_arrows">
+        <marker
+           id="SVG_0_loops_matching_arrow"
+           markerWidth="9"
+           markerHeight="9"
+           refX="9"
+           refY="5"
+           orient="auto">
+          <path
+             d="M 1 1 L 1 8 L 8 5 L 1 1"
+             class="idvc2_roofline_loops_matching_arrow"
+             id="path155" />
+        </marker>
+        <marker
+           id="SVG_0_ChildArrow"
+           markerWidth="9"
+           markerHeight="9"
+           refX="9"
+           refY="5"
+           orient="auto">
+          <path
+             d="M 1 1 L 1 8 L 8 5 L 1 1"
+             class="roofline_child_arrow"
+             id="path156" />
+        </marker>
+        <marker
+           id="SVG_0_ParentArrow"
+           markerWidth="9"
+           markerHeight="9"
+           refX="0"
+           refY="5"
+           orient="auto">
+          <path
+             d="M 1 1 L 1 8 L 8 5 L 1 1"
+             class="roofline_parent_arrow"
+             id="path157" />
+        </marker>
+      </defs>
+      <defs
+         id="SVG_0_fill_patterns">
+        <pattern
+           id="SVG_0_loopFill-6-4-cl"
+           patternContentUnits="objectBoundingBox"
+           width="100%"
+           height="100%">
+          <circle
+             cx=".5"
+             cy=".5"
+             r=".5"
+             fill="white"
+             id="circle157" />
+          <circle
+             cx=".5"
+             cy=".5"
+             r="0.3333333333333333"
+             fill="green"
+             stroke="black"
+             stroke-width="0.05"
+             id="circle158" />
+        </pattern>
+        <pattern
+           id="SVG_0_loopFill-8-4-cl"
+           patternContentUnits="objectBoundingBox"
+           width="100%"
+           height="100%">
+          <circle
+             cx=".5"
+             cy=".5"
+             r=".5"
+             fill="white"
+             id="circle159" />
+          <circle
+             cx=".5"
+             cy=".5"
+             r="0.25"
+             fill="green"
+             stroke="black"
+             stroke-width="0.05"
+             id="circle160" />
+        </pattern>
+        <pattern
+           id="SVG_0_loopFill-8-6-cl"
+           patternContentUnits="objectBoundingBox"
+           width="100%"
+           height="100%">
+          <circle
+             cx=".5"
+             cy=".5"
+             r=".5"
+             fill="white"
+             id="circle161" />
+          <circle
+             cx=".5"
+             cy=".5"
+             r="0.375"
+             fill="yellow"
+             stroke="black"
+             stroke-width="0.05"
+             id="circle162" />
+        </pattern>
+      </defs>
+      <defs
+         id="defs162">
+        <line
+           id="SVG_0_crossingTemplate"
+           x1="-4"
+           y1="-4"
+           x2="4"
+           y2="4" />
+      </defs>
+      <text
+         x="2"
+         y="2"
+         style="font-size: 90%; writing-mode: tb; dominant-baseline: text-after-edge"
+         id="text162">GFLOPS</text>
+      <text
+         x="1416"
+         y="1024"
+         style="font-size: 90%; text-anchor: end; dominant-baseline: text-after-edge"
+         id="text163"><tspan
+           id="tspan162">FLOP/Byte</tspan><tspan
+           style="font-size: 90%;"
+           id="tspan163"> (Arithmetic Intensity)</tspan></text>
+    </svg>
+  </g>
+  <ellipse
+     style="fill:none;stroke:#000080;stroke-width:3.3;stroke-dasharray:none"
+     id="path163"
+     cx="884.90112"
+     cy="294.88147"
+     rx="28.842476"
+     ry="25.352989" />
+  <text
+     xml:space="preserve"
+     id="text164"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;font-family:Sans;-inkscape-font-specification:'Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;shape-inside:url(#rect164);display:inline;fill:#000080;stroke:#000080;stroke-width:1;stroke-dasharray:none"><tspan
+       x="918.59766"
+       y="290.64446"
+       id="tspan3">Sparse matrix multiplication</tspan></text>
+  <ellipse
+     style="fill:none;stroke:#000080;stroke-width:3.3;stroke-dasharray:none"
+     id="ellipse164"
+     cx="876.8222"
+     cy="437.76395"
+     rx="28.842476"
+     ry="25.352989" />
+  <text
+     xml:space="preserve"
+     id="text165"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;font-family:Sans;-inkscape-font-specification:'Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;shape-inside:url(#rect165);display:inline;fill:#000080;stroke:#000080;stroke-width:1;stroke-dasharray:none"
+     transform="translate(-4.980731,163.8801)"
+     inkscape:export-filename="text165.png"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96"><tspan
+       x="918.59766"
+       y="290.64446"
+       id="tspan4">Program overall</tspan></text>
+</svg>
